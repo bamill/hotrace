@@ -12,15 +12,13 @@
 
 #ifndef HOTRACE_H
 # define HOTRACE_H
+# define LAMBDA(c_) ({c_ _;})
 # include <unistd.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 # include <stdlib.h>
 
-typedef struct		s_hashmap
-{
-    int				table_size;
-	t_list			**content;
-    f_hash			hash_fun;
-}					t_hashmap;
+typedef int			(*f_hash)(int, int);
 
 typedef struct		s_list
 {
@@ -29,16 +27,42 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef int			(*f_hash)(int, int);
+typedef struct		s_hashmap
+{
+    int				table_size;
+	t_list			**table;
+    f_hash			hash_fun;
+    t_list			*items;
+    t_list			*keys;
+    t_list			*values;
+    int				elems;
+}					t_hashmap;
 
-void				read_input(t_hashmap table);
-f_hash				generate_hash_fun(int table_size);
-t_hashmap			generate_hash_table(int table_size);
-void				insert(char *key, char *value);
-void				delete(char *key);
-void				update(char *key, char *value);
-void				*lookup(char *key);
-void				free_table(t_hashmap table);
-
+size_t				ft_strlen(const char *str);
+char				*ft_strncpy(char *dst, const char *src, size_t len);
+char				*ft_strchr(const char *s, int c);
+char				*ft_strnew(size_t size);
+void				*ft_memcpy(void *dst, const void *src, size_t n);
+char				*read_input(t_hashmap *map);
+t_list				*ft_lstnew(void const *content, size_t content_size);
+void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void				ft_bzero(void *s, size_t n);
+t_list				*ft_lstcpy(t_list *lst);
+void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_list_remove_if(t_list **begin, void *d, int (*cmp)());
+int					ft_strcmp(const char *s1, const char *s2);
+char				*ft_strdup(const char *s1);
+char				*ft_strjoin(char const *s1, char const *s2);
+void				ft_memdel(void **ap);
+int					get_next_line(const int fd, char **line);
+f_hash				*generate_hash_fun(int table_size);
+t_hashmap			*generate_hash_table(int table_size);
+int					prehash(char *str);
+t_hashmap			*grow_table(t_hashmap *map);
+t_hashmap			*shrink_table(t_hashmap *map);
+void				destroy_table(t_hashmap *map);
+void				insert(t_hashmap *map, char *key, char *value);
+void				delet(t_hashmap *map, char *key);
+char				*search(t_hashmap* map, char *key);
 
 #endif
