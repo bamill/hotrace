@@ -8,10 +8,10 @@ t_hashmap			*grow_table(t_hashmap *map)
   new->items = ft_lstcpy(map->items);
   new->keys = ft_lstcpy(map->keys);
   new->values = ft_lstcpy(map->values);
-  while (map->values)
+  while (map->keys)
     {
-      insert(map->values->content, map->values->content->next->content);
-      map->values = map->values->next;
+      insert(new, map->keys->content, search(map, map->keys->content));
+      map->keys = map->keys->next;
     }
   destroy_table(map);
   return (new);

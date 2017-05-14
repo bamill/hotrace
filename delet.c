@@ -15,7 +15,7 @@ void				delet(t_hashmap *map, char *key)
   if (!map)
     return ;
   if (map->elems <= map->table_size / 4)
-    map = shrink_map(map);
+    map = shrink_table(map);
   if (!(map->table[index]))
     return ;
   else if (ft_strcmp(key, map->table[index]->content->content))
