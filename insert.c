@@ -7,11 +7,11 @@ void		insert(t_hashmap *map, char *key, char *value)
   t_list	*head;
   t_list	*rest;
 
-  index = map->hash_fun(prehash(key), map->table_size);
+  index = map->hash_fun(prehash(key, ft_strlen(key)), map->table_size);
   list = ft_lstnew(key, sizeof key);
   list->next = ft_lstnew(value, sizeof value);
   if (!map)
-    return (NULL);
+    return ;
   if (map->elems == map->table_size)
     map = grow_table(map);
   if (!((map->table)[index]))
@@ -32,8 +32,8 @@ void		insert(t_hashmap *map, char *key, char *value)
       map->table[index] = ft_lstnew(list, sizeof list);
       map->table[index]->next = rest;
     }
-  ft_lstadd(map->keys, ft_lstnew(key, sizeof key));
-  ft_lstadd(map->values, ft_lstnew(value, sizeof value));
-  ft_lstadd(map->items, ft_lstnew(list, sizeof list));
+  ft_lstadd(&map->keys, ft_lstnew(key, sizeof key));
+  ft_lstadd(&map->values, ft_lstnew(value, sizeof value));
+  ft_lstadd(&map->items, ft_lstnew(list, sizeof list));
   map->elems++;
 }

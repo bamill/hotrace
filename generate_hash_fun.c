@@ -77,9 +77,9 @@ static int	get_random_int(int min, int max)
     return (res % max + min);
 }
 
-f_hash		generate_hash_fun(int table_size)
+f_hash		*generate_hash_fun(int table_size)
 {
-    f_hash		hash_fun;
+    f_hash		*hash_fun;
     int			a;
     int			b;
     int			p;
@@ -87,7 +87,10 @@ f_hash		generate_hash_fun(int table_size)
     p = next_next_prime(table_size);
     a = get_random_int(1, p - 1);
     b = get_random_int(0, p - 1);
-    hash_fun = LAMBDA(int _(int key, int table_size) {
+    hash_fun = (f_hash*)(malloc(sizeof(f_hash)));
+    if (!hash_fun)
+        return (NULL);
+    *hash_fun = LAMBDA(int _(int key, int table_size) {
             return ((((a * key) + b) % p) % table_size);
         });
     return (hash_fun);

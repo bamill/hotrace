@@ -3,12 +3,12 @@
 char				*search(t_hashmap* map, char *key)
 {
   int		index;
-  t_list	head;
+  t_list	*head;
   char		*res;
 
   if (!key || !map)
     return (NULL);
-  index = map->hash_fun(prehash(key), map->table_size);
+  index = map->hash_fun(prehash(key, ft_strlen(key)), map->table_size);
   if (!(map->table[index]))
     return (NULL);
   head = map->table[index];

@@ -2,8 +2,8 @@
 
 int			prehash(char *str, size_t len)
 {
-  int	result;
-  int	counter;
+  int		result;
+  size_t	counter;
 
 
   if (!str)

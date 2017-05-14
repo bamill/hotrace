@@ -37,6 +37,6 @@ char		*read_input(t_hashmap *map)
         }
       counter++;
     }
-  ft_memdel(line);
+  ft_memdel((void**)line);
   return (value);
 }

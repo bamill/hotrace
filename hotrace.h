@@ -12,6 +12,8 @@
 
 #ifndef HOTRACE_H
 # define HOTRACE_H
+# define BUFF_SIZE 32
+# define MEMCHK(m) if (!m) return (-1);
 # define LAMBDA(c_) ({c_ _;})
 # include <unistd.h>
 # include <sys/stat.h>
@@ -31,7 +33,7 @@ typedef struct		s_hashmap
 {
     int				table_size;
 	t_list			**table;
-    f_hash			hash_fun;
+    f_hash			*hash_fun;
     t_list			*items;
     t_list			*keys;
     t_list			*values;
@@ -57,7 +59,7 @@ void				ft_memdel(void **ap);
 int					get_next_line(const int fd, char **line);
 f_hash				*generate_hash_fun(int table_size);
 t_hashmap			*generate_hash_table(int table_size);
-int					prehash(char *str);
+int					prehash(char *str, size_t len);
 t_hashmap			*grow_table(t_hashmap *map);
 t_hashmap			*shrink_table(t_hashmap *map);
 void				destroy_table(t_hashmap *map);
