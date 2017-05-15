@@ -14,9 +14,9 @@ char				*search(t_hashmap* map, char *key)
   head = map->table[index];
   while (map->table[index])
     {
-      if (!(ft_strcmp(key, map->table[index]->content->content)))
+      if (!(ft_strcmp(key, map->table[index]->content)))
         {
-          res = map->table[index]->content->next->content;
+          res = map->table[index]->next->content;
           map->table[index] = head;
           return (res);
         }

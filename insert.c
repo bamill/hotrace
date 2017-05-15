@@ -16,7 +16,7 @@ void		insert(t_hashmap *map, char *key, char *value)
     map = grow_table(map);
   if (!((map->table)[index]))
       (map->table)[index] = ft_lstnew(list, sizeof list);
-  else if (ft_strcmp(key, map->table[index]->content->content))
+  else if (ft_strcmp(key, map->table[index]->content))
     {
       head = map->table[index];
       while (map->table[index]->next && ft_strcmp(key, map->table[index]->next->content))

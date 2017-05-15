@@ -18,16 +18,16 @@ void				delet(t_hashmap *map, char *key)
     map = shrink_table(map);
   if (!(map->table[index]) || !(map->table[index]->content))
     return ;
-  else if (ft_strcmp(key, map->table[index]->content->content))
+  else if (ft_strcmp(key, map->table[index]->content))
     {
       head = map->table[index];
       while (map->table[index]->next && ft_strcmp(key, map->table[index]->next->content))
         map->table[index] = map->table[index]->next;
       if (map->table[index]->next)
         {
+          ft_list_remove_if(&map->values, search(map, key), ft_strcmp);
           tmp = map->table[index]->next->next ? map->table[index]->next->next : NULL;
           map->table[index]->next->next = NULL;
-          ft_list_remove_if(&map->values, map->table[index]->next->content->next->content, ft_strcmp);
           ft_lstdel(&(map->table[index]->next), ft_bzero);
           map->table[index]->next = tmp;
         }
@@ -35,9 +35,9 @@ void				delet(t_hashmap *map, char *key)
     }
   else
     {
+      ft_list_remove_if(&map->values, search(map, key), ft_strcmp);
       tmp = map->table[index]->next ? map->table[index]->next : NULL;
       map->table[index]->next = NULL;
-      ft_list_remove_if(&map->values, map->table[index]->content->next->content, ft_strcmp);
       ft_lstdel(&(map->table[index]), ft_bzero);
       map->table[index] = tmp;
     }

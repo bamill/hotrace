@@ -33,7 +33,7 @@ typedef struct		s_hashmap
 {
     int				table_size;
 	t_list			**table;
-    f_hash			*hash_fun;
+    f_hash			hash_fun;
     t_list			*items;
     t_list			*keys;
     t_list			*values;
