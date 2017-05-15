@@ -57,6 +57,7 @@ char				*ft_strdup(const char *s1);
 char				*ft_strjoin(char const *s1, char const *s2);
 void				ft_memdel(void **ap);
 int					get_next_line(const int fd, char **line);
+int					div_hash(int key, int table_size);
 f_hash				*generate_hash_fun(int table_size);
 t_hashmap			*generate_hash_table(int table_size);
 int					prehash(char *str, size_t len);
