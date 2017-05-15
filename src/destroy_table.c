@@ -9,7 +9,7 @@ void		destroy_table(t_hashmap *map)
   head = map->keys;
   while (map->keys)
     {
-      ft_lstdel(&map->table[map->hash_fun(prehash(map->keys->content, map->keys->content_size), map->table_size)], ft_bzero);
+      ft_lstdel(&map->table[map->hash_fun(prehash(map->keys->content, ft_strlen(map->keys->content)), map->table_size)], ft_bzero);
       map->keys = map->keys->next;
     }
   map->keys = head;

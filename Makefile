@@ -2,7 +2,7 @@ NAME = hotrace
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -pg
+CFLAGS = -Wall -Wextra -Werror -pg -g -fsanitize=address
 
 INCLUDES = -Iinclude
 
@@ -29,11 +29,11 @@ SRCS = src/delet.c \
 	src/get_next_line.c \
 	src/grow_table.c \
 	src/insert.c \
-	src/main.c \
 	src/prehash.c \
 	src/read_input.c \
 	src/search.c \
 	src/shrink_table.c \
+	src/main.c \
 
 OBJS = $(SRCS:.c=.o)
 

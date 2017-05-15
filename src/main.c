@@ -8,7 +8,8 @@ int		main()
 
   map = generate_hash_table(8);
   ret = read_input(map);
-  printf("%s", ret);
+  if (ret)
+    printf("%s", ret);
   destroy_table(map);
   return (0);
 }
